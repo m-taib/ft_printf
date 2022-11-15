@@ -36,6 +36,8 @@ int	ft_atoi(const char *str)
 int		nlen(long int n)
 {
 	int		c;
+	if (n == 0)
+		return (0);
 	c = 0;
 	if (n < 0)
 	{
@@ -76,140 +78,248 @@ int handle_zero_spaces(int a,int b,char c,int *cn)
 	{
 		i++;
 		ft_putchar(c,cn);
-        a--;
+        	a--;
 	}
 	i = i + b;
 	return (i);
 }
-void ft_putnbr_original(int n,int pwd,int *cn,int mwd,t_list *pt)
+
+void ft_space_plus(char *c,int n,int *cn,int *i)
 {
-	int		i;
-	int	s;
-	s = 0;
-	if (pt->space && !pt->width && !pwd && !mwd)//(pt->minus || pt->per))
+	if (n >= 0)
+       		ft_putchar(c[0],cn);
+        ft_printnb(n,cn);
+        handle_zero_spaces(i[2],i[0],c[1],cn);
+}
+
+void single_flag(int n, int *cn, t_list *pt)
+{
+	if (pt->space && !pt->width && !pt->per && !pt->minus && !pt->plus && n >= 0)
+        {
+                ft_putchar(' ',cn);
+                ft_printnb(n,cn);
+        }
+	if (pt->plus && !pt->width && !pt->per && !pt->minus && !pt->space && n >= 0)
+        {
+                ft_putchar('+',cn);
+                ft_printnb(n,cn);
+        }
+	if ((pt->space || pt->plus) && !pt->width && !pt->per && !pt->minus && n < 0)
 	{
-		write(1," ",1);
+		ft_putchar('-',cn);
 		ft_printnb(n,cn);
+	}
+}
+void ft_putnbr_original(int n,int pwd,int *cn,int wd,t_list *pt)
+{
+	int		i[3];
+	single_flag(n, cn, pt);
+	
+	if (pt->per && !pt->minus && !pt->width)
+	{
+                 if (pwd > nlen(n))
+                         {
+			      if (n < 0)
+				      ft_putchar('-',cn);
+			      if (n == 0 && pwd > 1)
+				      handle_zero_spaces(pwd,1,'0',cn);
+			      if (n > 0 || n < 0)
+			      		handle_zero_spaces(pwd,nlen(n),'0',cn);
+                              ft_printnb(n,cn);
+                         }
+                  else if (pwd <= nlen(n))
+                   {
+
+                                        if (n < 0)
+					{
+						ft_putchar('-',cn);
+						ft_printnb(n,cn);
+					}
+                                        if (n > 0)
+						ft_printnb(n,cn);
+                   }
+
+
 	}
 	if (pt->minus)
 	{
-		if (pt->per)	
+		if (pt->per || ((pt->space || pt->plus) && n >= 0))
 		{
-
-			i = pwd;
-			if (pt->plus && (n > 0 || n < 0))
-			{mwd--;
-				if (n > 0)
-					s = 1;}
-			if (pwd > nlen(n))
-				if (pwd > i + nlen(n))
-					i = pwd;
-				else
-					i = nlen(n);
-			else
-				i = nlen(n);
-			if (n < 0)
-				write(1,"-",1);
-			if (s == 1)
+			i[0] = nlen(n);
+			i[2] = wd;
+			if (pt->per)
 			{
-				mwd++;
-				write(1,"+",1);
+				if (pt->space && n >= 0)
+					ft_putchar(' ',cn);
+				if (pt->plus && n >= 0)
+					ft_putchar('+',cn);
+				if (n < 0)
+					ft_putchar('-',cn);
+				if (pwd > nlen(n))
+				{
+					i[1] = pwd;
+					i[1] = handle_zero_spaces(pwd,nlen(n),'0',cn);
+                       			if (n > 0 || n < 0)
+						ft_printnb(n,cn);
+					if (n < 0)
+						i[1]++;
+					i[2] = wd;
+					handle_zero_spaces(i[2],i[1],' ',cn);
+				}
+				else if (pwd <= nlen(n))
+				{
+					if (n < 0)
+                                                i[0]++;
+                                        i[2] = wd;
+                       			if (n > 0 || n < 0)
+						ft_printnb(n,cn);
+                                        handle_zero_spaces(i[2],i[0],' ',cn);
+				}
 			}
-			i = handle_zero_spaces(pwd,i,'0',cn);
-			ft_printnb(n,cn);
-			if (n < 0)
-				i++;
-			handle_zero_spaces(mwd,i,' ',cn);
+			if (!pt->per && !pt->space && pt->plus)
+				ft_space_plus("+ ",n,cn,i);
+			if (!pt->per && pt->space && !pt->plus)
+				ft_space_plus("  ",n,cn,i);
 		}
 		else
 		{
-			i = nlen(n);
-			if (pt->plus && n > 0)
-				write(1,"+",1);
-			if ( n < 0)
-				write(1,"-",1);
-			ft_printnb(n,cn);
 			if (n < 0)
-				i++;
-            		handle_zero_spaces(mwd,i,' ',cn);
+			{
+				wd--;
+				ft_putchar('-',cn);
+			}
+                        ft_printnb(n,cn);
+			if (wd > 1)
+			{
+				if (n == 0)
+					handle_zero_spaces(wd,1,' ',cn);
+				else
+					handle_zero_spaces(wd,nlen(n),' ',cn);
+			}
 		}
+
 	}
 	if (pt->width)
 	{
-		if (pt->per)
+		if (pt->per || (pt->plus && n >= 0) || pt->zero)
 		{
-			if (pt->plus && (n >= 0 || n < 0))
-			{	
-				mwd--;
+			if (pt->zero && !pt->per)
+                	{
+                        	if (pt->plus && n >=0)
+                        	{
+                                	ft_putchar('+',cn);
+                                	wd--;
+                       		 }
+                        	if (n < 0)
+				{
+					wd--;
+					ft_putchar('-',cn);
+				}
+				if (wd >= 1)
+                        	{
+                                	if (n == 0)
+                                        	handle_zero_spaces(wd,1,'0',cn);
+                                	else
+                                        	handle_zero_spaces(wd,nlen(n),'0',cn);
+                        	}
+
+                        	ft_printnb(n,cn);
+                	}
+
+			i[0] = nlen(n);
+                        i[2] = wd;
+			if (pt->per)
+                        {
+				if (pwd <= nlen(n))
+				{
+					i[2] = wd;
+					if ((pt->plus && n >= 0) || n < 0)
+						i[2]--;
+					handle_zero_spaces(i[2],nlen(n),' ',cn);
+                                	if (pt->plus && n >= 0)
+						ft_putchar('+',cn);
+					if (n < 0)
+						ft_putchar('-',cn);
+                                        if (n > 0 || n < 0)
+						ft_printnb(n,cn);
+				}
+                                if (pwd > nlen(n))
+                                {
+                                        i[1] = pwd;
+					i[2] = nlen(n);
+					if ((pt->plus && n >= 0) || n < 0)
+                                                wd--;
+					handle_zero_spaces(wd,i[1],' ',cn);
+					if (pt->plus && n >= 0)
+                                                ft_putchar('+',cn);
+					if (n < 0)
+						ft_putchar('-',cn);
+                                        handle_zero_spaces(pwd, i[2],'0',cn);
+                                        if (n > 0 || n < 0)
+						ft_printnb(n,cn);
+                                }
+			}
+			if (!pt->per && pt->plus && !pt->zero)
+			{
 				if (n >= 0)
-					s = 1;}
-			i = nlen(n);
-			if (pwd > nlen(n))
-				if (mwd > i + nlen(n))
-					i = pwd;
-				else
-					i = nlen(n);
-			else
-				i = nlen(n);
-			if (n < 0)
-				mwd--;
-				//i++;
-			if (mwd > i)
-				handle_zero_spaces(mwd,i,' ',cn);
-			if (s == 1)
-				write(1,"+",1);
-			if (n < 0)
-				write(1,"-",1);
-			if (pwd > nlen(n))
-				handle_zero_spaces(pwd,nlen(n),'0',cn);
-			ft_printnb(n,cn);
+					wd--;
+       				handle_zero_spaces(wd,i[0],' ',cn);
+				if (n >= 0)
+        			        ft_putchar('+',cn);
+     			  	ft_printnb(n,cn);
+
+			}
 		}
-		else
-		{
-			i = nlen(n);
-			if (pt->plus && (n > 0))// || n < 0))
-				mwd--;
+	else
+                {
+                        if (n < 0)
+                                wd--;
+			if (wd > 1)
+                        	handle_zero_spaces(wd,nlen(n),' ',cn);
 			if (n < 0)
-				mwd--;
-			handle_zero_spaces(mwd,i,' ',cn);
-			if (pt->plus && n > 0)
-				write(1,"+",1);
-			if (n < 0)
-				write(1,"-",1);
-			ft_printnb(n,cn);
-		}	
+				ft_putchar('-',cn);
+                        ft_printnb(n,cn);
+                }
+
+
+
 	}
+}
+
+int 	minus_value(t_list *pt,char *str,int n)
+{
+	int	mwd;
+	int	i;
+	i = 0;
+	mwd = 0;
+         if (pt->space || pt->plus)
+             {
+                         if (n >= 0)
+                                 mwd = ft_atoi(&str[i]) - 1;
+                         else
+                                 mwd = ft_atoi(&str[i]);
+            }
+         else
+              mwd = ft_atoi(&str[i]);
+	return (mwd);
+
 }
 
 void	ft_putnbr(int n,char *str,int *cn,t_list *pt)
 {
 	int		pwd;
-	int		mwd;
+	int		wd;
 	int		i;
 	i = 0;
 	pwd = 0;
-	mwd = 0;
-	//if (pt->state)
-	//{
-		if (pt->width)
-			mwd = ft_atoi(&str[i]);
-		if (pt->zero && !(pt->minus && pt->per))
-			mwd = ft_atoi(&str[i]);
-
+	wd = 0;
+	if (pt->status)
+	{
+		if (pt->width || pt->zero)
+			wd = ft_atoi(&str[i]);
 		if (pt->minus)
-		{
-			if (pt->space || pt->plus)
-			{
-				while(str[i] && str[i] != '-')
-					i++;
-				if (n > 0)
-					mwd = ft_atoi(&str[i+1]) - 1;
-				else
-					mwd = ft_atoi(&str[i+1]);
-			}
-			else
-				mwd = ft_atoi(&str[i+1]);
-		}
+			wd = minus_value(pt,str,n);
+		
 		if (pt->per)
 		{
 			while(str[i] && str[i] != '.')
@@ -217,8 +327,12 @@ void	ft_putnbr(int n,char *str,int *cn,t_list *pt)
 			if (str[i])
 				pwd = ft_atoi(&str[i+1]);
 		}
-		ft_putnbr_original(n,pwd,cn,mwd,pt);
-	//}
-
-	
+		ft_putnbr_original(n,pwd,cn,wd,pt);
+	}
+	else
+	{
+		if (n < 0)
+			ft_putchar('-',cn);
+		ft_printnb(n,cn);
+	}
 }

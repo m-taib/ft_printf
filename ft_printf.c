@@ -98,6 +98,20 @@ void hex(unsigned int nb,char c,int *ptr)
 			ft_putchar(arr[nb%16] - 32,ptr);
 	}
 }
+void skip(char *str,int *i,char c)
+{
+	while (!(str[*i+1] >= '0' && str[*i+1] <= '9') && str[*i+1] == c)
+		*i = *i + 1;
+}
+
+int	check_status(t_list *pt)
+{
+	if (pt->minus || pt->zero || pt->per || pt->dec || pt->width
+			|| pt->space || pt->plus)
+		return (1);
+	return (0);
+}
+
 void hexlong(unsigned long nb,int *ptr)
 {
         char arr[16]="0123456789abcdef";
@@ -114,11 +128,12 @@ void	hexvalue(void *pt,int *ptr)
 }
 void reset(t_list *pt)
 {
+	pt->status = 0;
 	pt->minus = 0;
-    pt->zero = 0;
-    pt->per = 0;
-    pt->dec = 0;
-    pt->width = 0;
+    	pt->zero = 0;
+    	pt->per = 0;
+    	pt->dec = 0;
+    	pt->width = 0;
 	pt->space = 0;
 	pt->plus = 0;
 
@@ -145,7 +160,7 @@ void	placeholder(char *st,char c,int *ptr,va_list args,t_list *pt)
                	hexvalue(va_arg(args,void *),ptr);
         if(c == '%')
               	ft_putchar('%',ptr);
-		reset(pt);
+	reset(pt);
 }
 
 int	ft_check_ph(char c)
@@ -157,18 +172,17 @@ int	ft_check_ph(char c)
 	return (1);
 }
 
-int	scan_flags(char *str,int i,va_list args,t_list *pt)
+int	scan_flags(char *str,int i,t_list *pt)
 {
-	
 	while (str[i] && ft_check_ph(str[i]))
 	{
 		if (str[i] == '-')
 			pt->minus = 1;
-		if ((str[i] >= '0' && str[i] <= '9') && !pt->minus)
+		if ((str[i] >= '0' && str[i] <= '9') && !pt->minus && str[i-1] != '.')
 			pt->width = 1;
 		if (str[i] == '.')
 			pt->per = 1;
-		if (str[i] == '0')
+		if (str[i] == '0' && (!pt->minus || !pt->per) && !(str[i-1] >= '1' && str[i-1] <= '9'))
 			pt->zero = 1;
 		if (str[i] == ' ' && !pt->width)
 			pt->space = 1;
@@ -178,9 +192,22 @@ int	scan_flags(char *str,int i,va_list args,t_list *pt)
 			pt->plus = 1;
 		i++;
 	}
+	pt->status = check_status(pt);
 	return (i);
 }
 
+void ft_scan(char *str,t_list *data,int *i,int *f)
+{
+	*f = scan_flags(str,*i,data);
+	if (check_status(data))
+             {
+                 while (!(str[*i] >= '0' && str[*i] <= '9') && str[*i] && str[*i] != '.')
+                 	{
+                             skip(str,i,str[*i]);
+                             *i = *i + 1;
+                         }
+             }
+}
 int ft_printf(const char *str, ...)
 {
 	va_list args;
@@ -200,29 +227,31 @@ int ft_printf(const char *str, ...)
 		else
 		{
 			i++;
-			if (str[i] == '-')
-				while (!(str[i+1] >= '0' && str[i+1] <= '9') && str[i+1] == '-')
-					i++;
-			f = scan_flags((char *)str,i,args,data);
+			ft_scan((char *)str,data,&i,&f);
 			placeholder((char *)(str + i),str[f],&cn,args,data);
 			i = f;
 		}
 		i++;
 	}
-	va_end(args);
-	return (cn);
+	free(data);
+	return (va_end(args),cn);
 }
-int main()
+/*int main()
 {
 	int b;
 	//b = -10;
 	//ft_printf("%+30.20d||\n",b);
-	b = 0;
-	ft_printf("%+30.20d||\n",b);
-	printf("%+30.20d",b);
-}
+	b = 9;
+	//ft_printf("%.2d\n",0);
+	//printf("%.2d",0);
+
+	ft_printf("%.4d%.2d%.20d%.0d%.0d%.d%.d%.d\n", 127, 0, 1023, 0, (int)-2147483648, 0, 1, (int)-2147483648);
+	printf("%.4d%.2d%.20d%.0d%.0d%.d%.d%.d", 127, 0, 1023, 0, (int)-2147483648, 0, 1, (int)-2147483648);
+	//ft_printf("%.2d\n", 0000);//, 0, (int)-2147483648, 0, 1, (int)-2147483648);
+	//printf("%2d", 0000);//, 0, (int)-2147483648, 0, 1, (int)-2147483648);
+}*/
 /*#include <stdio.h>
-int	main()
+int	main():se
 {
 	ft_printf("This %p is even stranger", (void *)-1);
 	printf("This %p is even stranger", (void *)-1);
