@@ -1,131 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtaib <mtaib@student.1337.ma>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/25 17:37:09 by mtaib             #+#    #+#             */
+/*   Updated: 2022/11/26 19:33:22 by mtaib            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	placeholder2(char *st, int *ptr, va_list args, t_list *pt)
 {
-	size_t			i;
-	unsigned char	*str;
-
-	str = (unsigned char *)b;
-	i = 0;
-	while (i < len)
-	{
-		str[i] = c;
-		i++;
-	}
-	return ((void *)(str));
-}
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
-
-void	*libft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
-}
-
-int	ft_strlen(const char *str,t_list *pt)
-{
-	int	i;
-	
-	i = 0;
-	while (str[i])
-		i++;
-	if (pt->placeholder =='c' && str[0] == '\0')
-		i++;
-	return (i);
-}
-
-void	ft_putchar(char c, int *ptr)
-{
-	write(1, &c, 1);
-	*ptr = *ptr + 1;
-	;
-}
-void	ft_putstr(char *str, int *ptr)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i], ptr);
-		i++;
-	}
-}
-
-void	hex(unsigned int nb, char c, int *ptr)
-{
-	char 	arr[16] = "0123456789abcdef";
-	if (nb / 16)
-		hex(nb / 16, c, ptr);
-	if (c == 'x')
-		ft_putchar(arr[nb % 16], ptr);
-	else
-	{
-		if (arr[nb % 16] >= '0' && arr[nb % 16] <= '9')
-			ft_putchar(arr[nb % 16], ptr);
-		else
-			ft_putchar(arr[nb % 16] - 32, ptr);
-	}
-}
-void	skip(char *str, int *i, char c)
-{
-	while (!(str[*i + 1] >= '0' && str[*i + 1] <= '9') && str[*i + 1] == c)
-		*i = *i + 1;
-}
-
-int	check_status(t_list *pt)
-{
-	if (pt->minus || pt->zero || pt->per || pt->dec || pt->width || pt->space
-		|| pt->plus || pt->hash)
-		return (1);
-	return (0);
-}
-
-void	hexlong(unsigned long nb, int *ptr)
-{
-	char	arr[16] = "0123456789abcdef";
-	if (nb / 16)
-		hexlong(nb / 16, ptr);
-	ft_putchar(arr[nb % 16], ptr);
-}
-
-void	hexvalue(void *pt, int *ptr)
-{
-	ft_putchar('0', ptr);
-	ft_putchar('x', ptr);
-	hexlong((unsigned long)pt, ptr);
-}
-void	reset(t_list *pt)
-{
-	pt->status = 0;
-	pt->minus = 0;
-	pt->zero = 0;
-	pt->per = 0;
-	pt->dec = 0;
-	pt->width = 0;
-	pt->space = 0;
-	pt->plus = 0;
-	pt->placeholder = '\0';
-	pt->pwd = 0;
-	pt->wd = 0;
-	pt->hash = 0;
-}
-void	placeholder(char *st, char c, int *ptr, va_list args, t_list *pt)
-{
-		char *str;
-	if (c == 'c')
+	if (pt->placeholder == 'c')
 	{
 		if (pt->status)
 		{
@@ -135,45 +23,44 @@ void	placeholder(char *st, char c, int *ptr, va_list args, t_list *pt)
 			ft_putnbr(0, st, ptr, pt);
 		}
 		else
-				ft_putchar(va_arg(args, int), ptr);
+			ft_putchar(va_arg(args, int), ptr);
 	}
-	if (c == 's')
+	if (pt->placeholder == 's')
 	{
-		str = va_arg(args, char *);
-		if (!str)
-			str = "(null)";
+		pt->str = va_arg(args, char *);
+		if (!pt->str)
+			pt->str = "(null)";
 		if (pt->status)
-		{
-			pt->str = str;
 			ft_putnbr(0, st, ptr, pt);
-		}
 		else
-			ft_putstr(str, ptr);
+			ft_putstr(pt->str, ptr);
 	}
-	if (c == 'd' || c == 'i')
+}
+
+void	placeholder(char *st, int *ptr, va_list args, t_list *pt)
+{
+	if (pt->placeholder == 'd' || pt->placeholder == 'i')
 		ft_putnbr(va_arg(args, int), st, ptr, pt);
-	if (c == 'u')
+	if (pt->placeholder == 'u')
 		ft_putnbr(va_arg(args, unsigned int), st, ptr, pt);
-	if (c == 'x' || c == 'X')
-		ft_putnbr((long long)va_arg(args, unsigned int), st, ptr,pt);
-	if (c == 'p')
+	if (pt->placeholder == 'x' || pt->placeholder == 'X')
+		ft_putnbr((long long)va_arg(args, unsigned int), st, ptr, pt);
+	if (pt->placeholder == 'p')
 	{
 		if (pt->status)
 			ft_putnbr((unsigned long)va_arg(args, void *), st, ptr, pt);
 		else
 			hexvalue(va_arg(args, void *), ptr);
 	}
-	if (c == '%')
-		ft_putchar('%', ptr);
+	if (pt->placeholder == '%')
+	{
+		if (!pt->status)
+			ft_putchar('%', ptr);
+		else
+			ft_putnbr(0, st, ptr, pt);
+	}
+	placeholder2(st, ptr, args, pt);
 	reset(pt);
-}
-
-int	ft_check_ph(char c)
-{
-	if (c == 'd' || c == 'i' || c == 'c' || c == 's' || c == 'x' ||
-		c == 'X' || c == 'p' || c == '%' || c == 'u')
-		return (0);
-	return (1);
 }
 
 int	scan_flags(char *str, int i, t_list *pt)
@@ -208,44 +95,44 @@ int	scan_flags(char *str, int i, t_list *pt)
 void	ft_scan(char *str, t_list *data, int *i, int *f)
 {
 	*f = scan_flags(str, *i, data);
-
 	if (check_status(data))
 	{
-		while (!(str[*i] >= '0' && str[*i] <= '9') && str[*i] && str[*i] != '.' && ft_check_ph(str[*i]) == 1)
+		while (!(str[*i] >= '0' && str[*i] <= '9') && str[*i] && str[*i] != '.'
+			&& ft_check_ph(str[*i]) == 1)
 		{
 			skip(str, i, str[*i]);
 			*i = *i + 1;
 		}
 	}
 }
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	t_list	*data;
-	int		i;
-	int		f;
-	int		cn;
+	int		i[3];
 
+	i[0] = 0;
+	i[1] = 0;
+	i[2] = 0;
 	data = libft_calloc(1, sizeof(t_list));
 	va_start(args, str);
-	cn = 0;
-	f = 0;
-	i = 0;
-	while (str[i])
+	while (str[i[0]])
 	{
-		if (str[i] != '%')
-			ft_putchar(str[i], &cn);
+		if (str[i[0]] != '%')
+			ft_putchar(str[i[0]], &i[2]);
 		else
 		{
-			i++;
-			ft_scan((char *)str, data, &i, &f);
-			placeholder((char *)(str + i), str[f], &cn, args, data);
-			i = f;
+			i[0]++;
+			ft_scan((char *)str, data, &i[0], &i[1]);
+			data->placeholder = str[i[1]];
+			placeholder((char *)(str + i[0]), &i[2], args, data);
+			i[0] = i[1];
 		}
-		i++;
+		i[0]++;
 	}
 	free(data);
-	return (va_end(args), cn);
+	return (va_end(args), i[2]);
 }
 /*int main()
 {
@@ -253,10 +140,10 @@ int	ft_printf(const char *str, ...)
 	//b = -10;
 	//ft_printf("%+30.20d||\n",b);
 	//b = -4200;
-		
-	//ft_printf("We %-s what we %8s||\n", "do", "must");
-	//ft_printf("We %-s what we %8s, %-2s we %-20s||\n", "do", "must", "because", "can");
-	//printf("We %-s what we %8s, %-2s we %-20s||", "do", "must", "because", "can");
+	//printf(" % s ", "-");
+	//ft_printf("% s\n", "hello");
+	//printf("% s", "hello");
+	ft_printf("We %-s what we %8s||\n", "do", "must");
 	//ft_printf("%-3c||\n", '\0');
 	//ft_printf("%9x||\n", (unsigned int)3735929054);
 	//printf("%9x||", (unsigned int)3735929054);

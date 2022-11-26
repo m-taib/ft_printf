@@ -1,6 +1,6 @@
-SRC = ft_printf.c u_format.c s_format.c 
-#BSRC = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-	ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c 
+SRC = ft_printf.c  printf_op.c ft_printf_utils0.c s_format.c \
+	  percentage.c ft_printf_utils.c ft_printf_utils00.c ft_printf_utils000.c ft_printf_utils2.c ft_printf_utils3.c \
+	  ft_printf_utils4.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -14,13 +14,12 @@ AR = ar -rcs
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(AR) $@ $^
+	$(AR) $@ $^
 
-#bonus :$(BOBJ) $(NAME)
-#	@$(AR) $(NAME) $(BOBJ)
+bonus : fclean all
 
 %.o:%.c
-	@cc -c $(CFLAGS)  $< 
+	cc -c $(CFLAGS)  $< 
 
 clean :
 	@rm -f *.o

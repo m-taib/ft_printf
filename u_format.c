@@ -34,11 +34,12 @@ int	ft_atoi(const char *str)
 	return (res * arb);
 }
 
-int	nlen(long long n,char c)
+int	nlen(long long n, char c)
 {
-	int	cn;
-	int base;
-	unsigned long long nb;
+	int					cn;
+	int					base;
+	unsigned long long	nb;
+
 	nb = 0;
 	base = 10;
 	cn = 0;
@@ -46,7 +47,7 @@ int	nlen(long long n,char c)
 		base = 16;
 	if (c == 'p')
 	{
-		nb  = n;
+		nb = n;
 		while (nb)
 		{
 			nb = nb / base;
@@ -72,7 +73,7 @@ int	nlen(long long n,char c)
 	return (cn);
 }
 
-void	ft_printnb(int n, int *cn,char c)
+void	ft_printnb(int n, int *cn, char c)
 {
 	unsigned int	nb;
 
@@ -81,8 +82,7 @@ void	ft_printnb(int n, int *cn,char c)
 		hex(nb, c, cn);
 	else
 	{
-
-		if(c !='u')
+		if (c != 'u')
 		{
 			if (n < 0)
 			{
@@ -113,7 +113,7 @@ void	ft_space_plus(char *c, int n, int *cn, t_list *pt)
 {
 	if (n >= 0)
 		ft_putchar(c[0], cn);
-	ft_printnb(n, cn,pt->placeholder);
+	ft_printnb(n, cn, pt->placeholder);
 	handle_zero_spaces(pt->i[2], pt->i[0], c[1], cn);
 }
 
@@ -123,7 +123,7 @@ void	single_flag(int n, int *cn, t_list *pt)
 		&& n >= 0)
 	{
 		ft_putchar(' ', cn);
-		ft_printnb(n, cn,pt->placeholder);
+		ft_printnb(n, cn, pt->placeholder);
 	}
 	if (pt->plus && !pt->width && !pt->per && !pt->minus && !pt->space
 		&& n >= 0)
@@ -138,19 +138,19 @@ void	single_flag(int n, int *cn, t_list *pt)
 		ft_printnb(n, cn, pt->placeholder);
 	}
 }
-void	single_flag_per(long long n, int pwd, int *cn,t_list *pt)
+void	single_flag_per(long long n, int pwd, int *cn, t_list *pt)
 {
-	if (pwd > nlen(n,pt->placeholder))
+	if (pwd > nlen(n, pt->placeholder))
 	{
 		if (n < 0 && pt->placeholder != 'u')
 			ft_putchar('-', cn);
 		if (n > 0 || (n < 0 && pt->placeholder != 'u'))
-			handle_zero_spaces(pwd, nlen(n,pt->placeholder), '0', cn);
+			handle_zero_spaces(pwd, nlen(n, pt->placeholder), '0', cn);
 		if (n == 0 && pwd > 1)
 			handle_zero_spaces(pwd, 1, '0', cn);
 		ft_printnb(n, cn, pt->placeholder);
 	}
-	else if (pwd <= nlen(n,pt->placeholder))
+	else if (pwd <= nlen(n, pt->placeholder))
 	{
 		if (n < 0 && pt->placeholder != 'u')
 		{
@@ -165,9 +165,10 @@ void	ft_per_minus(long long n, t_list *pt, int *cn)
 {
 	int	i[3];
 
-	i[0] = nlen(n,pt->placeholder);
+	i[0] = nlen(n, pt->placeholder);
 	if ((pt->placeholder == 'x' || pt->placeholder == 'X') && pt->hash)
-		print_hex(pt,cn);;
+		print_hex(pt, cn);
+	;
 	if (pt->pwd > i[0])
 	{
 		i[1] = pt->pwd;
@@ -178,10 +179,10 @@ void	ft_per_minus(long long n, t_list *pt, int *cn)
 			i[1]++;
 		i[2] = pt->wd;
 		if ((pt->placeholder == 'x' || pt->placeholder == 'X') && pt->hash)
-			i[1] = i[1] + 2; 
+			i[1] = i[1] + 2;
 		handle_zero_spaces(i[2], i[1], ' ', cn);
 	}
-	else if (pt->pwd <= nlen(n,pt->placeholder))
+	else if (pt->pwd <= nlen(n, pt->placeholder))
 	{
 		if (n < 0)
 			i[0]++;
@@ -194,246 +195,249 @@ void	ft_per_minus(long long n, t_list *pt, int *cn)
 	}
 }
 
-void 	print_hex(t_list *pt,int *cn)
+void	print_hex(t_list *pt, int *cn)
 {
 	if (pt->placeholder == 'x')
-		ft_putstr("0x",cn);
+		ft_putstr("0x", cn);
 	else
-		ft_putstr("0X",cn);
+		ft_putstr("0X", cn);
 	//hex(n, pt->placeholder, cn);
 }
 
-void	ft_putnbr_original(long long  n, int pwd, int *cn, int wd, t_list *pt)
+void	ft_putnbr_original(long long n, int pwd, int *cn, int wd, t_list *pt)
 {
 	if (pt->placeholder == 'p')
 	{
 		if (pt->width)
 		{
-			handle_zero_spaces(wd, nlen(n,pt->placeholder), ' ', cn);
-			ft_putstr("0x",cn);
+			handle_zero_spaces(wd, nlen(n, pt->placeholder), ' ', cn);
+			ft_putstr("0x", cn);
 			hexlong(n, cn);
 		}
 		if (pt->minus)
 		{
-			ft_putstr("0x",cn);
+			ft_putstr("0x", cn);
 			hexlong(n, cn);
-			handle_zero_spaces(wd, nlen(n,pt->placeholder), ' ', cn);
+			handle_zero_spaces(wd, nlen(n, pt->placeholder), ' ', cn);
 		}
 	}
 	if (pt->placeholder != 'p')
 	{
-	if (pt->hash && (pt->placeholder == 'x' || pt->placeholder == 'X'))
-	{
-		if (pt->per && pt->hash && !pt->width && !pt->minus && !pt->zero)
+		if (pt->hash && (pt->placeholder == 'x' || pt->placeholder == 'X'))
 		{
-			pt->i[0] = nlen(n,pt->placeholder);
-			if (n != 0)
-				print_hex(pt,cn);
-			handle_zero_spaces(pt->pwd, pt->i[0], '0', cn);
-			hex(n, pt->placeholder, cn);
-		}	
-		if (!pt->width && !pt->minus && !pt->zero && !pt->per)
-		{
-			if (n != 0)
-				print_hex(pt,cn);
-			hex(n, pt->placeholder, cn);
+			if (pt->per && pt->hash && !pt->width && !pt->minus && !pt->zero)
+			{
+				pt->i[0] = nlen(n, pt->placeholder);
+				if (n != 0)
+					print_hex(pt, cn);
+				handle_zero_spaces(pt->pwd, pt->i[0], '0', cn);
+				hex(n, pt->placeholder, cn);
+			}
+			if (!pt->width && !pt->minus && !pt->zero && !pt->per)
+			{
+				if (n != 0)
+					print_hex(pt, cn);
+				hex(n, pt->placeholder, cn);
+			}
 		}
-	}
-	if (pt->placeholder != 'u' || pt->placeholder != 'x' || pt->placeholder != 'X')
-		single_flag(n, cn, pt);
-	if (pt->per && !pt->minus && !pt->width && !pt->hash)
-		single_flag_per(n, pwd, cn,pt);
-	if (pt->minus)
-	{
-		if (pt->per || ((pt->space || pt->plus) && n >= 0))
+		if (pt->placeholder != 'u' || pt->placeholder != 'x'
+			|| pt->placeholder != 'X')
+			single_flag(n, cn, pt);
+		if (pt->per && !pt->minus && !pt->width && !pt->hash)
+			single_flag_per(n, pwd, cn, pt);
+		if (pt->minus)
 		{
-			pt->i[0] = nlen(n,pt->placeholder);
-			pt->i[2] = wd;
-			if (pt->per)
+			if (pt->per || ((pt->space || pt->plus) && n >= 0))
 			{
-				if (pt->placeholder == 'd' || pt->placeholder == 'i')
-				{	
-					if (pt->space)
-						ft_putchar(' ', cn);
-					if (pt->plus)
-						ft_putchar('+', cn);
-					if (n < 0  && pt->placeholder != 'u')
-						ft_putchar('-', cn);
-				}
-				ft_per_minus(n, pt, cn);
-				//if (pt->placeholder == 'x' || pt->placeholder == 'X')
-					
-			}
-			if (!pt->per && !pt->space && pt->plus  && pt->placeholder != 'u')
-				ft_space_plus("+ ", n, cn, pt);
-			if (!pt->per && pt->space && !pt->plus  && pt->placeholder != 'u')
-				ft_space_plus("  ", n, cn, pt);
-		}
-		else
-		{
-			if (n < 0)
-			{
-				wd--;
-				ft_putchar('-', cn);
-			}
-			if (pt->placeholder == 'x' || pt->placeholder == 'X')
-			{
-				if (n != 0 && pt->hash)
-					print_hex(pt,cn);
-			}
-			ft_printnb(n, cn, pt->placeholder);
-			if (wd > 1)
-			{
-				if (n == 0)
-					handle_zero_spaces(wd, 1, ' ', cn);
-				else 
+				pt->i[0] = nlen(n, pt->placeholder);
+				pt->i[2] = wd;
+				if (pt->per)
 				{
-					if (!(n < 0 && pt->placeholder == 'u'))
+					if (pt->placeholder == 'd' || pt->placeholder == 'i')
 					{
-						if (pt->placeholder == 'x' || pt->placeholder == 'X')
+						if (pt->space)
+							ft_putchar(' ', cn);
+						if (pt->plus)
+							ft_putchar('+', cn);
+						if (n < 0 && pt->placeholder != 'u')
+							ft_putchar('-', cn);
+					}
+					ft_per_minus(n, pt, cn);
+					//if (pt->placeholder == 'x' || pt->placeholder == 'X')
+				}
+				if (!pt->per && !pt->space && pt->plus
+					&& pt->placeholder != 'u')
+					ft_space_plus("+ ", n, cn, pt);
+				if (!pt->per && pt->space && !pt->plus
+					&& pt->placeholder != 'u')
+					ft_space_plus("  ", n, cn, pt);
+			}
+			else
+			{
+				if (n < 0)
+				{
+					wd--;
+					ft_putchar('-', cn);
+				}
+				if (pt->placeholder == 'x' || pt->placeholder == 'X')
+				{
+					if (n != 0 && pt->hash)
+						print_hex(pt, cn);
+				}
+				ft_printnb(n, cn, pt->placeholder);
+				if (wd > 1)
+				{
+					if (n == 0)
+						handle_zero_spaces(wd, 1, ' ', cn);
+					else
+					{
+						if (!(n < 0 && pt->placeholder == 'u'))
 						{
-							if (pt->hash)
-								pt->i[0] = nlen(n,pt->placeholder) + 2;
-							else
-								pt->i[0] = nlen(n,pt->placeholder);
+							if (pt->placeholder == 'x'
+								|| pt->placeholder == 'X')
+							{
+								if (pt->hash)
+									pt->i[0] = nlen(n, pt->placeholder) + 2;
+								else
+									pt->i[0] = nlen(n, pt->placeholder);
+								handle_zero_spaces(wd, pt->i[0], ' ', cn);
+							}
+						}
+						if (!(pt->placeholder == 'x' || pt->placeholder == 'X'))
+						{
+							pt->i[0] = nlen(n, pt->placeholder);
 							handle_zero_spaces(wd, pt->i[0], ' ', cn);
 						}
 					}
-					if (!(pt->placeholder == 'x' || pt->placeholder == 'X'))
-					{
-						pt->i[0] = nlen(n,pt->placeholder);
-						handle_zero_spaces(wd, pt->i[0], ' ', cn);
-					}
 				}
 			}
 		}
-	}
-	if (pt->width)
-	{
-		if (pt->per || (pt->plus && n >= 0) || pt->zero || pt->hash)
+		if (pt->width)
 		{
-			if ((pt->zero && !pt->per) || pt->hash)
+			if (pt->per || (pt->plus && n >= 0) || pt->zero || pt->hash)
 			{
+				if ((pt->zero && !pt->per) || pt->hash)
+				{
+					if (!pt->hash)
+					{
+						if (pt->plus && n >= 0)
+						{
+							ft_putchar('+', cn);
+							wd--;
+						}
+						if (n < 0 && pt->placeholder != 'u')
+						{
+							wd--;
+							ft_putchar('-', cn);
+						}
+						if (wd >= 1)
+						{
+							if (n == 0)
+								handle_zero_spaces(wd, 1, '0', cn);
+							else
+								handle_zero_spaces(wd, nlen(n, pt->placeholder),
+										'0', cn);
+						}
+						ft_printnb(n, cn, pt->placeholder);
+					}
+					else
+					{
+						if ((pt->width || pt->zero) && !pt->per)
+						{
+							pt->i[0] = nlen(n, pt->placeholder) + 2;
+							if (!pt->zero)
+								handle_zero_spaces(wd, pt->i[0], ' ', cn);
+							if (n != 0)
+								print_hex(pt, cn);
+							if (pt->zero)
+								handle_zero_spaces(wd, pt->i[0], '0', cn);
+							ft_printnb(n, cn, pt->placeholder);
+						}
+						if (pt->width && pt->per)
+						{
+							if (pt->pwd > nlen(n, pt->placeholder))
+							{
+								pt->i[0] = nlen(n, pt->placeholder) + 2 + (pwd
+										- nlen(n, pt->placeholder));
+								handle_zero_spaces(wd, pt->i[0], ' ', cn);
+								pt->i[0] = nlen(n, pt->placeholder) + 2;
+							}
+							else
+							{
+								pt->i[0] = nlen(n, pt->placeholder) + 2;
+								handle_zero_spaces(wd, pt->i[0], ' ', cn);
+							}
+							if (n != 0)
+								print_hex(pt, cn);
+							handle_zero_spaces(pt->pwd, nlen(n,
+										pt->placeholder), '0', cn);
+							ft_printnb(n, cn, pt->placeholder);
+						}
+					}
+				}
 				if (!pt->hash)
 				{
-					if (pt->plus && n >= 0)
-					{
-						ft_putchar('+', cn);
-						wd--;
-					}
-					if (n < 0  && pt->placeholder != 'u')
-					{
-						wd--;
-						ft_putchar('-', cn);
-					}
-					if (wd >= 1)
-					{
-						if (n == 0)
-							handle_zero_spaces(wd, 1, '0', cn);
-						else
-							handle_zero_spaces(wd, nlen(n,pt->placeholder), '0', cn);
-					}
-					ft_printnb(n, cn,pt->placeholder);
-				}
-				else 
-				{
-					if ((pt->width || pt->zero) && !pt->per)
-					{
-						pt->i[0] = nlen(n,pt->placeholder) + 2;
-						if (!pt->zero)
-							handle_zero_spaces(wd, pt->i[0], ' ', cn);
-						if (n != 0)
-							print_hex(pt,cn);
-						if (pt->zero)
-							handle_zero_spaces(wd, pt->i[0], '0', cn);
-						ft_printnb(n, cn,pt->placeholder);
-					}
-					if (pt->width && pt->per)
-					{
-						if (pt->pwd > nlen(n,pt->placeholder))
-						{
-							pt->i[0] = nlen(n,pt->placeholder) + 2 + (pwd - nlen(n,pt->placeholder));
-							handle_zero_spaces(wd, pt->i[0], ' ', cn);
-							pt->i[0] = nlen(n,pt->placeholder) + 2;
-						}
-						else
-						{
-							pt->i[0] = nlen(n,pt->placeholder) + 2;
-							handle_zero_spaces(wd, pt->i[0], ' ', cn);
-
-						}
-						if (n != 0)
-							print_hex(pt,cn);
-						handle_zero_spaces(pt->pwd, nlen(n,pt->placeholder), '0', cn);
-						ft_printnb(n, cn,pt->placeholder);
-						
-					}
-				}
-			}
-			if (!pt->hash)
-			{
-			pt->i[0] = nlen(n,pt->placeholder);
-			pt->i[2] = wd;
-			if (pt->per)
-			{
-				if (pwd <= nlen(n,pt->placeholder))
-				{
+					pt->i[0] = nlen(n, pt->placeholder);
 					pt->i[2] = wd;
-					if ((pt->plus && n >= 0) || n < 0)
-						pt->i[2]--;
-					handle_zero_spaces(pt->i[2], nlen(n,pt->placeholder), ' ', cn);
-					if (pt->plus && n >= 0)
-						ft_putchar('+', cn);
-					if (n < 0  && pt->placeholder != 'u')
-						ft_putchar('-', cn);
-					if (n > 0 || (n < 0  && pt->placeholder != 'u'))
-						ft_printnb(n, cn,pt->placeholder);
-				}
-				if (pwd > nlen(n,pt->placeholder))
-				{
-					pt->i[1] = pwd;
-					pt->i[2] = nlen(n,pt->placeholder);
-					if ((pt->plus && n >= 0) || n < 0)
-						wd--;
-					handle_zero_spaces(wd, pt->i[1], ' ', cn);
-					if (pt->plus && n >= 0)
-						ft_putchar('+', cn);
-					if (n < 0  && pt->placeholder != 'u')
-						ft_putchar('-', cn);
-					handle_zero_spaces(pwd, pt->i[2], '0', cn);
-					if (n > 0 || (n < 0  && pt->placeholder != 'u'))
-						ft_printnb(n, cn,pt->placeholder);
+					if (pt->per)
+					{
+						if (pwd <= nlen(n, pt->placeholder))
+						{
+							pt->i[2] = wd;
+							if ((pt->plus && n >= 0) || n < 0)
+								pt->i[2]--;
+							handle_zero_spaces(pt->i[2], nlen(n,
+										pt->placeholder), ' ', cn);
+							if (pt->plus && n >= 0)
+								ft_putchar('+', cn);
+							if (n < 0 && pt->placeholder != 'u')
+								ft_putchar('-', cn);
+							if (n > 0 || (n < 0 && pt->placeholder != 'u'))
+								ft_printnb(n, cn, pt->placeholder);
+						}
+						if (pwd > nlen(n, pt->placeholder))
+						{
+							pt->i[1] = pwd;
+							pt->i[2] = nlen(n, pt->placeholder);
+							if ((pt->plus && n >= 0) || n < 0)
+								wd--;
+							handle_zero_spaces(wd, pt->i[1], ' ', cn);
+							if (pt->plus && n >= 0)
+								ft_putchar('+', cn);
+							if (n < 0 && pt->placeholder != 'u')
+								ft_putchar('-', cn);
+							handle_zero_spaces(pwd, pt->i[2], '0', cn);
+							if (n > 0 || (n < 0 && pt->placeholder != 'u'))
+								ft_printnb(n, cn, pt->placeholder);
+						}
+					}
+					if (!pt->per && pt->plus && !pt->zero)
+					{
+						if (n >= 0)
+							wd--;
+						handle_zero_spaces(wd, pt->i[0], ' ', cn);
+						if (n >= 0)
+							ft_putchar('+', cn);
+						ft_printnb(n, cn, pt->placeholder);
+					}
 				}
 			}
-			
-			if (!pt->per && pt->plus && !pt->zero)
+			else
 			{
-				if (n >= 0)
+				if (n < 0 && pt->placeholder != 'u')
 					wd--;
-				handle_zero_spaces(wd, pt->i[0], ' ', cn);
-				if (n >= 0)
-					ft_putchar('+', cn);
-				ft_printnb(n, cn,pt->placeholder);
-			}
-			}
-		}
-		else
-		{
-			if (n < 0  && pt->placeholder != 'u')
-				wd--;
-			if (wd > 1 && n == 0)
-			{
-				//if (n == 0)
+				if (wd > 1 && n == 0)
+				{
+					//if (n == 0)
 					handle_zero_spaces(wd, 1, ' ', cn);
-			}
-			
-			else if (wd > 1)
-					handle_zero_spaces(wd, nlen(n,pt->placeholder), ' ', cn);
-			if (n < 0  && pt->placeholder != 'u')
+				}
+				else if (wd > 1)
+					handle_zero_spaces(wd, nlen(n, pt->placeholder), ' ', cn);
+				if (n < 0 && pt->placeholder != 'u')
 					ft_putchar('-', cn);
-			ft_printnb(n, cn,pt->placeholder);
+				ft_printnb(n, cn, pt->placeholder);
+			}
 		}
-	}
 	}
 }
 void	minus_value(t_list *pt, char *str, int n)
@@ -445,7 +449,7 @@ void	minus_value(t_list *pt, char *str, int n)
 	{
 		if (n >= 0)
 			pt->wd = ft_atoi(&str[i]) - 1;
-		else if ( n < 0 && pt->placeholder != 'u')
+		else if (n < 0 && pt->placeholder != 'u')
 			pt->wd = ft_atoi(&str[i]);
 	}
 	else
@@ -455,16 +459,17 @@ void	minus_value(t_list *pt, char *str, int n)
 void	ft_putnbr(long long n, char *str, int *cn, t_list *pt)
 {
 	int	i;
+
 	i = 0;
 	if (pt->status || pt->placeholder == 's' || pt->placeholder == 'c')
 	{
 		if (pt->width || pt->zero)
 		{
-			if (!pt->hash || str[i+1] != '#')
+			if (!pt->hash || str[i + 1] != '#')
 				pt->wd = ft_atoi(&str[i]);
 			else
 			{
-				if (str[i+1] == '#')
+				if (str[i + 1] == '#')
 				{
 					i++;
 					while (str[i] == '#' && str[i])
@@ -474,7 +479,7 @@ void	ft_putnbr(long long n, char *str, int *cn, t_list *pt)
 			}
 		}
 		if (pt->minus)
-			 /*pt->wd==*/minus_value(pt, str, n);
+			/*pt->wd==*/minus_value(pt, str, n);
 		if (pt->per)
 		{
 			while (str[i] && str[i] != '.')
@@ -485,12 +490,12 @@ void	ft_putnbr(long long n, char *str, int *cn, t_list *pt)
 		if (pt->placeholder != 's' && pt->placeholder != 'c')
 			ft_putnbr_original(n, pt->pwd, cn, pt->wd, pt);
 		else if (pt->placeholder == 's' || pt->placeholder == 'c')
-			ft_putstrb(pt->str,pt,cn);
+			ft_putstrb(pt->str, pt, cn);
 	}
 	else
 	{
-			if ((n < 0 && pt->placeholder != 'u')) 
-					ft_putchar('-', cn);
-			ft_printnb(n, cn,pt->placeholder);
+		if ((n < 0 && pt->placeholder != 'u'))
+			ft_putchar('-', cn);
+		ft_printnb(n, cn, pt->placeholder);
 	}
 }

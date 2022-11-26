@@ -1,0 +1,209 @@
+d_format.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  65, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  70, col:   5):	Comment is invalid in this scope
+Error: NEWLINE_PRECEDES_FUNC (line:  75, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line:  98, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 119, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 119, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 142, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 142, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 168, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 168, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 168, col:  72):	Function has more than 4 arguments
+Error: TOO_MANY_LINES       (line: 292, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 294, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 313, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 323, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 324, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 325, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 326, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 327, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 328, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 329, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 330, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 331, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 332, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 333, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 334, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 335, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 336, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 337, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 338, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 339, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 340, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 341, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 342, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 343, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 344, col:   1):	Function has more than 25 lines
+ft_printf.c: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Error: NEWLINE_PRECEDES_FUNC (line:  21, col:   1):	Functions must be separated by a newline
+Error: EMPTY_LINE_FUNCTION  (line:  53, col:   6):	Empty line in function
+Error: NEWLINE_PRECEDES_FUNC (line:  55, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line:  55, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line:  67, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line:  84, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line:  84, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line:  90, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line:  98, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 108, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 114, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 114, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 129, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 129, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 129, col:  74):	Function has more than 4 arguments
+Error: TOO_MANY_LINES       (line: 174, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 176, col:   1):	Too many functions in file
+Error: EOL_OPERATOR         (line: 178, col:  66):	Logic operator at the end of line
+Error: TOO_MANY_FUNCS       (line: 184, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 213, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 226, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 226, col:   1):	Too many functions in file
+Error: TOO_MANY_LINES       (line: 254, col:   1):	Function has more than 25 lines
+mand.c: Error!
+Error: NEWLINE_PRECEDES_FUNC (line:  29, col:   1):	Functions must be separated by a newline
+Error: NEWLINE_PRECEDES_FUNC (line:  44, col:   1):	Functions must be separated by a newline
+Error: EMPTY_LINE_FUNCTION  (line:  58, col:   6):	Empty line in function
+Error: NEWLINE_PRECEDES_FUNC (line:  60, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line:  60, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line:  72, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line:  89, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line:  89, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 106, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 106, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 116, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 123, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 148, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 154, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 155, col:   5):	Comment is invalid in this scope
+p_format.c: Error!
+Error: TOO_MANY_LINES       (line:  74, col:   1):	Function has more than 25 lines
+Error: NEWLINE_PRECEDES_FUNC (line:  97, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 120, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 141, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 141, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 164, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 164, col:   1):	Too many functions in file
+Error: EMPTY_LINE_FUNCTION  (line: 171, col:   6):	Empty line in function
+Error: TOO_MANY_LINES       (line: 196, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 198, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 204, col:   5):	Comment is invalid in this scope
+Error: NEWLINE_PRECEDES_FUNC (line: 206, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 206, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 206, col:  78):	Function has more than 4 arguments
+Error: TOO_MANY_FUNCS       (line: 226, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 242, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 265, col:  13):	Comment is invalid in this scope
+Error: COMMENT_ON_INSTR     (line: 265, col:  25):	Comment must be on its own line
+Error: TOO_FEW_TAB          (line: 265, col:  25):	Missing tabs for indent level
+Error: TOO_MANY_INSTR       (line: 265, col:  25):	Too many instructions on a single line
+Error: TOO_MANY_LINES       (line: 289, col:   1):	Function has more than 25 lines
+printf_op.c: Error!
+Error: NEWLINE_PRECEDES_FUNC (line:  55, col:   1):	Functions must be separated by a newline
+Error: NEWLINE_PRECEDES_FUNC (line: 102, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 117, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 125, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 146, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 146, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 169, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 169, col:   1):	Too many functions in file
+Error: EMPTY_LINE_FUNCTION  (line: 176, col:   6):	Empty line in function
+Error: TOO_MANY_LINES       (line: 201, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 203, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 210, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 210, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 225, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 225, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 242, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 242, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 264, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 264, col:   1):	Too many functions in file
+Error: TOO_MANY_TAB         (line: 282, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 284, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 285, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 286, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 287, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 288, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 289, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 290, col:   1):	Extra tabs for indent level
+Error: NEWLINE_PRECEDES_FUNC (line: 291, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 291, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 313, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 313, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 332, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 332, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 332, col:  72):	Function has more than 4 arguments
+Error: NEWLINE_PRECEDES_FUNC (line: 358, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 358, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 367, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 367, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 379, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 379, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 379, col:  81):	Function has more than 4 arguments
+Error: NEWLINE_PRECEDES_FUNC (line: 396, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 396, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 410, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 410, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 410, col:  78):	Function has more than 4 arguments
+Error: NEWLINE_PRECEDES_FUNC (line: 429, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 429, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 445, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 471, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 471, col:   1):	Too many functions in file
+s_format.c: Error!
+Error: NEWLINE_PRECEDES_FUNC (line:  22, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_LINES       (line:  84, col:   1):	Function has more than 25 lines
+u_format.c: Error!
+Error: TOO_MANY_LINES       (line:  74, col:   1):	Function has more than 25 lines
+Error: NEWLINE_PRECEDES_FUNC (line:  97, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 120, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 141, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 141, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 164, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 164, col:   1):	Too many functions in file
+Error: EMPTY_LINE_FUNCTION  (line: 171, col:   6):	Empty line in function
+Error: TOO_MANY_LINES       (line: 196, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 198, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 204, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line: 207, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 207, col:  78):	Function has more than 4 arguments
+Error: WRONG_SCOPE_COMMENT  (line: 266, col:  21):	Comment is invalid in this scope
+Error: TOO_MANY_TAB         (line: 339, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 373, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 390, col:   1):	Extra tabs for indent level
+Error: WRONG_SCOPE_COMMENT  (line: 431, col:  21):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 442, col:   1):	Function has more than 25 lines
+Error: NEWLINE_PRECEDES_FUNC (line: 443, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 443, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 459, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 482, col:  13):	Comment is invalid in this scope
+Error: COMMENT_ON_INSTR     (line: 482, col:  25):	Comment must be on its own line
+Error: TOO_FEW_TAB          (line: 482, col:  25):	Missing tabs for indent level
+Error: TOO_MANY_INSTR       (line: 482, col:  25):	Too many instructions on a single line
+Error: TOO_MANY_LINES       (line: 501, col:   1):	Function has more than 25 lines
+x_format.c: Error!
+Error: TOO_MANY_FUNCS       (line: 102, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 123, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 123, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 146, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 146, col:   1):	Too many functions in file
+Error: NEWLINE_PRECEDES_FUNC (line: 172, col:   1):	Functions must be separated by a newline
+Error: TOO_MANY_FUNCS       (line: 172, col:   1):	Too many functions in file
+Error: TOO_MANY_ARGS        (line: 172, col:  78):	Function has more than 4 arguments
+Error: TOO_MANY_TAB         (line: 245, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 259, col:   1):	Extra tabs for indent level
+Error: WRONG_SCOPE_COMMENT  (line: 299, col:  17):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 309, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 311, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 327, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 337, col:  13):	Comment is invalid in this scope
+Error: COMMENT_ON_INSTR     (line: 337, col:  25):	Comment must be on its own line
+Error: TOO_FEW_TAB          (line: 337, col:  25):	Missing tabs for indent level
+Error: TOO_MANY_INSTR       (line: 337, col:  25):	Too many instructions on a single line
+ft_printf.h: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Error: NL_AFTER_PREPROC     (line:   7, col:   1):	Preprocessor statement must be followed by a newline
+Error: TOO_MANY_ARGS        (line:  40, col:  79):	Function has more than 4 arguments
+Error: TOO_MANY_ARGS        (line:  45, col:  28):	Function has more than 4 arguments
